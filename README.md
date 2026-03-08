@@ -1,4 +1,4 @@
-# 🔋 Optimisateur de Batterie - Simulation & Arbitrage
+Optimisateur de Batterie - Simulation & Arbitrage
 
 Solution full-stack permettant de simuler l'utilisation d'une batterie résidentielle et d'optimiser les coûts d'électricité basée sur l'arbitrage tarifaire.
 
@@ -8,7 +8,7 @@ Backend (FastAPI)
 1. Allez dans le dossier 'server'.
 2. Créez un environnement virtuel : 'python -m venv venv'.
 3. Activez-le : '.\venv\Scripts\activate' (Windows) ou 'source venv/bin/activate' (Linux/Mac).
-4. Installez les dépendances : `pip install -r requirements.txt`.
+4. Installez les dépendances : 'pip install -r requirements.txt'.
 5. Renommez '.env.template' (si présent) en '.env' et configurez votre 'API_KEY'.
 
 Frontend (React + Vite)
