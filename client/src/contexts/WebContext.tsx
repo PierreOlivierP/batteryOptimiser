@@ -12,12 +12,6 @@ const axiosInstance = axios.create({
   }
 });
 
-export interface Web {
-  id: number;
-  name: string;
-  email: string;
-}
-
 interface WebContextType {
   health: () => Promise<any>;
   optimize: (batteryData: any) => Promise<any>;
