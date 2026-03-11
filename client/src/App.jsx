@@ -14,14 +14,14 @@ function AppContent() {
     maxDischarge: 5,
     efficiency: 0.9,
     initialSoc: 5,
-    loadKwH: [2, 2, 1, 2, 3, 2, 1, 2, 3, 2, 2, 2, 1, 2, 3, 2, 2, 1, 2, 3, 2, 2, 2, 1],
-    priceKwH: [3, 12, 7, 0, 15, 9, 2, 6, 14, 5, 8, 1, 11, 4, 10, 7, 13, 2, 6, 0, 9, 5, 8, 12]
+    loadKwH: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0],
+    priceKwH: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0]
   })
 
   const [loadMode, setLoadMode] = useState('hourly')
   const [priceMode, setPriceMode] = useState('hourly')
-  const [hourlyLoad, setHourlyLoad] = useState([2, 2, 1, 2, 3, 2, 1, 2, 3, 2, 2, 2, 1, 2, 3, 2, 2, 1, 2, 3, 2, 2, 2, 1])
-  const [hourlyPrice, setHourlyPrice] = useState([3, 12, 7, 0, 15, 9, 2, 6, 14, 5, 8, 1, 11, 4, 10, 7, 13, 2, 6, 0, 9, 5, 8, 12])
+  const [hourlyLoad, setHourlyLoad] = useState(new Array(24).fill(0))
+  const [hourlyPrice, setHourlyPrice] = useState(new Array(24).fill(0))
   const [visualizationData, setVisualizationData] = useState(null)
   const [optimizationResult, setOptimizationResult] = useState(null)
   const [error, setError] = useState(null)
@@ -47,7 +47,7 @@ function AppContent() {
     const finalData = {
       ...batteryData,
       loadKwH: loadMode === 'fixed' ? batteryData.loadKwH : hourlyLoad,
-      priceKwh: priceMode === 'fixed' ? batteryData.priceKwH : hourlyPrice,
+      priceKwH: priceMode === 'fixed' ? batteryData.priceKwH : hourlyPrice,
       loadMode,
       priceMode
     };
@@ -132,8 +132,8 @@ function AppContent() {
           <div style={{ marginBottom: '15px', borderBottom: '1px solid #444', paddingBottom: '10px' }}>
             <label><strong>Données de charge:</strong> </label>
             <select value={loadMode} onChange={(e) => setLoadMode(e.target.value)}>
-              <option value="fixed">Prix fixe</option>
-              <option value="hourly">Prix par heure (24 values)</option>
+              <option value="fixed">Charge fixe</option>
+              <option value="hourly">Charge par heure (24 values)</option>
             </select>
             {loadMode === 'fixed' ? (
               <div style={{ marginTop: '5px' }}>
@@ -150,10 +150,10 @@ function AppContent() {
           </div>
 
           <div style={{ marginBottom: '15px' }}>
-            <label><strong>Price Data:</strong> </label>
+            <label><strong>Prix:</strong> </label>
             <select value={priceMode} onChange={(e) => setPriceMode(e.target.value)}>
-              <option value="fixed">Fixed Price</option>
-              <option value="hourly">Charge par heure</option>
+              <option value="fixed">Prix fixe</option>
+              <option value="hourly">Prix par heure</option>
             </select>
             {priceMode === 'fixed' ? (
               <div style={{ marginTop: '5px' }}>

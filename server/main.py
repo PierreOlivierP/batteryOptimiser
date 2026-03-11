@@ -140,7 +140,7 @@ def simulation(simulation_data: Simulation, optimize = False):
             batteryPower = prev_battery_power
             accumulatedPower = prev_accumulated
     
-    return accumulatedPower, batteryPower, batteryHourlyState
+    return accumulatedPower, batteryHourlyState
 
 @app.get("/")
 def read_root():
@@ -160,7 +160,7 @@ def optimize(request: Request, simulation_data: Simulation, api_key: str = Depen
     for i in range(24):
         total_cost_before += simulation_data.priceKwh[i]
     
-    accumulatedPower, batteryPower, batteryHourlyState = simulation(simulation_data, optimize=True)
+    accumulatedPower, batteryHourlyState = simulation(simulation_data, optimize=True)
 
     if min(accumulatedPower) < 0:
         return {
@@ -231,7 +231,7 @@ def optimize(request: Request, simulation_data: Simulation, api_key: str = Depen
 def visualize(request: Request, simulation_data: Simulation, api_key: str = Depends(get_api_key)):
     print(f"Received visualization request: {simulation_data}")
     
-    accumulatedPower, batteryPower, batteryHourlyState = simulation(simulation_data, optimize=True)
+    accumulatedPower, batteryHourlyState = simulation(simulation_data, optimize=True)
 
     if min(accumulatedPower) < 0:
         return {
